@@ -1,19 +1,114 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - Whiteheart School</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h2 {
+            color: #333;
+        }
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        textarea, input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #0077cc;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #0077cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        hr {
+            margin: 30px 0;
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
-    <h2>Welcome Admin</h2>
 
-    <h3>Edit Home Page Content</h3>
+    <h2>Admin Dashboard - Whiteheart School</h2>
 
-    <form action="/edit-home" method="POST">
-        <textarea name="content" rows="6" cols="50"></textarea><br><br>
-        <button type="submit">Update Home Page</button>
-    </form>
+    <!-- Edit Pages -->
+    <div class="section">
+        <h3>Edit Home Page</h3>
+        <form action="/edit-home" method="POST">
+            <textarea name="content" rows="6" placeholder="New home page content"></textarea><br>
+            <button type="submit">Update Home Page</button>
+        </form>
+    </div>
 
-    <br>
-    <a href="/">Go Back to Website</a>
+    <div class="section">
+        <h3>Edit About Page</h3>
+        <form action="/edit-about" method="POST">
+            <textarea name="content" rows="6" placeholder="New about page content"></textarea><br>
+            <button type="submit">Update About Page</button>
+        </form>
+    </div>
+
+    <div class="section">
+        <h3>Edit Programs Page</h3>
+        <form action="/edit-programs" method="POST">
+            <textarea name="content" rows="6" placeholder="New programs page content"></textarea><br>
+            <button type="submit">Update Programs Page</button>
+        </form>
+    </div>
+
+    <!-- Upload Pictures -->
+    <div class="section">
+        <h3>Upload Gallery Image</h3>
+        <form action="/upload-image" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" required><br>
+            <button type="submit">Upload Image</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- View Applications -->
+    <div class="section">
+        <h3>Admissions</h3>
+        <a href="/applications">View Admission Applications</a>
+    </div>
+
+    <!-- View Contact Messages -->
+    <div class="section">
+        <h3>Contact Messages</h3>
+        <a href="/contacts">View Contact Messages</a>
+    </div>
+
+    <!-- Back to Website -->
+    <div class="section">
+        <h3>Website</h3>
+        <a href="/">Go Back to Website</a>
+    </div>
+
 </body>
 </html>

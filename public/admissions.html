@@ -21,7 +21,8 @@
 <section class="section">
     <h2>Admission Form</h2>
 
-    <form action="/apply" method="POST">
+    <!-- FORM -->
+    <form id="admissionForm" action="/apply" method="POST">
         <input type="text" name="studentName" placeholder="Student Full Name" required>
         <input type="number" name="age" placeholder="Age" required>
 
@@ -39,11 +40,38 @@
 
         <button type="submit">Submit Application</button>
     </form>
+
+    <!-- SUCCESS MESSAGE -->
+    <p id="successMsg" style="color:green; margin-top:20px; display:none;">Application Submitted Successfully!</p>
 </section>
 
 <footer>
     <p>© 2026 Whiteheart School</p>
 </footer>
+
+<!-- SCRIPT TO SHOW SUCCESS MESSAGE WITHOUT RELOADING -->
+<script>
+const form = document.getElementById('admissionForm');
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    const response = await fetch('/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    if(response.ok){
+        document.getElementById('successMsg').style.display = 'block';
+        form.reset();
+    } else {
+        alert('Error submitting application');
+    }
+});
+</script>
 
 </body>
 </html>

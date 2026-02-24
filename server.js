@@ -6,7 +6,9 @@ const path = require("path");
 
 const app = express();
 
+// MIDDLEWARE
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // Needed for JSON POST from admissions page
 app.use(express.static("public"));
 
 app.use(session({
@@ -68,6 +70,76 @@ app.post("/edit-home", (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
+// ---------------------------------------
+// ADMISSIONS FORM HANDLER
+// ---------------------------------------
+app.post("/apply", (req, res) => {
+    const newApplication = {
+        studentName: req.body.studentName,
+        age: req.body.age,
+        class: req.body.class,
+        parentName: req.body.parentName,
+        phone: req.body.phone,
+        date: new Date()
+    };
+
+    const dataFolder = path.join(__dirname, "data");
+    if (!fs.existsSync(dataFolder)) fs.mkdirSync(dataFolder);
+
+    const filePath = path.join(dataFolder, "applications.json");
+    let applications = [];
+
+    if (fs.existsSync(filePath)) {
+        applications = JSON.parse(fs.readFileSync(filePath));
+    }
+
+    applications.push(newApplication);
+    fs.writeFileSync(filePath, JSON.stringify(applications, null, 2));
+
+    res.status(200).send("Success");
+});
+
+// VIEW ADMISSION APPLICATIONS (ADMIN ONLY)
+app.get("/applications", (req, res) => {
+    if (req.session.loggedIn) {
+        const filePath = path.join(__dirname, "data/applications.json");
+        let applications = [];
+
+        if (fs.existsSync(filePath)) {
+            applications = JSON.parse(fs.readFileSync(filePath));
+        }
+
+        let html = `
+        <h2>Admission Applications</h2>
+        <a href="/dashboard">Back to Dashboard</a>
+        <div style="margin-top:20px;">
+        `;
+
+        applications.forEach(app => {
+            html += `
+            <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+                <p><strong>Name:</strong> ${app.studentName}</p>
+                <p><strong>Age:</strong> ${app.age}</p>
+                <p><strong>Class:</strong> ${app.class}</p>
+                <p><strong>Parent:</strong> ${app.parentName}</p>
+                <p><strong>Phone:</strong> ${app.phone}</p>
+                <p><strong>Date:</strong> ${new Date(app.date).toLocaleString()}</p>
+            </div>
+            `;
+        });
+
+        html += "</div>";
+        res.send(html);
+
+    } else {
+        res.redirect("/admin");
+    }
+});
+
+// ---------------------------------------
+// DYNAMIC PORT FOR RENDER
+// ---------------------------------------
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
