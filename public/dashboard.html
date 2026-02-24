@@ -2,112 +2,154 @@
 <html>
 <head>
     <title>Admin Dashboard - Whiteheart School</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
-        body {
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f5f5;
         }
-        h2 {
-            color: #333;
+
+        body{
+            background:#f4f6f9;
+            padding:30px;
         }
-        .section {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+        h2{
+            text-align:center;
+            margin-bottom:30px;
+            color:#004080;
         }
-        textarea, input[type="text"], input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
+
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:25px;
         }
-        button {
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            background-color: #0077cc;
-            color: white;
-            cursor: pointer;
+
+        .section{
+            background:#fff;
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
         }
-        button:hover {
-            background-color: #005fa3;
+
+        .section h3{
+            margin-bottom:15px;
+            color:#004080;
         }
-        a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #0077cc;
-            text-decoration: none;
+
+        textarea, input[type="text"], input[type="file"]{
+            width:100%;
+            padding:10px;
+            border-radius:6px;
+            border:1px solid #ccc;
+            margin-bottom:10px;
         }
-        a:hover {
-            text-decoration: underline;
+
+        button{
+            padding:10px 18px;
+            border:none;
+            border-radius:6px;
+            background:#004080;
+            color:white;
+            cursor:pointer;
+            transition:0.3s;
         }
-        hr {
-            margin: 30px 0;
-            border: 0;
-            border-top: 1px solid #ccc;
+
+        button:hover{
+            background:#00264d;
         }
+
+        .btn-link{
+            display:inline-block;
+            padding:10px 18px;
+            background:gold;
+            color:black;
+            text-decoration:none;
+            border-radius:6px;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .btn-link:hover{
+            background:#ffcc00;
+        }
+
+        .footer-links{
+            text-align:center;
+            margin-top:40px;
+        }
+
+        @media(max-width:768px){
+            body{
+                padding:15px;
+            }
+        }
+
     </style>
 </head>
 <body>
 
     <h2>Admin Dashboard - Whiteheart School</h2>
 
-    <!-- Edit Pages -->
-    <div class="section">
-        <h3>Edit Home Page</h3>
-        <form action="/edit-home" method="POST">
-            <textarea name="content" rows="6" placeholder="New home page content"></textarea><br>
-            <button type="submit">Update Home Page</button>
-        </form>
+    <div class="grid">
+
+        <!-- Edit Home -->
+        <div class="section">
+            <h3>Edit Home Page</h3>
+            <form action="/edit-home" method="POST">
+                <textarea name="content" rows="5" placeholder="New home page content"></textarea>
+                <button type="submit">Update Home</button>
+            </form>
+        </div>
+
+        <!-- Edit About -->
+        <div class="section">
+            <h3>Edit About Page</h3>
+            <form action="/edit-about" method="POST">
+                <textarea name="content" rows="5" placeholder="New about page content"></textarea>
+                <button type="submit">Update About</button>
+            </form>
+        </div>
+
+        <!-- Edit Programs -->
+        <div class="section">
+            <h3>Edit Programs Page</h3>
+            <form action="/edit-programs" method="POST">
+                <textarea name="content" rows="5" placeholder="New programs page content"></textarea>
+                <button type="submit">Update Programs</button>
+            </form>
+        </div>
+
+        <!-- Upload Image -->
+        <div class="section">
+            <h3>Upload Gallery Image</h3>
+            <form action="/upload-image" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" required>
+                <button type="submit">Upload Image</button>
+            </form>
+        </div>
+
+        <!-- Admissions -->
+        <div class="section">
+            <h3>Admissions</h3>
+            <a href="/applications" class="btn-link">View Applications</a>
+        </div>
+
+        <!-- Contact Messages -->
+        <div class="section">
+            <h3>Contact Messages</h3>
+            <a href="/messages" class="btn-link">View Messages</a>
+        </div>
+
     </div>
 
-    <div class="section">
-        <h3>Edit About Page</h3>
-        <form action="/edit-about" method="POST">
-            <textarea name="content" rows="6" placeholder="New about page content"></textarea><br>
-            <button type="submit">Update About Page</button>
-        </form>
-    </div>
-
-    <div class="section">
-        <h3>Edit Programs Page</h3>
-        <form action="/edit-programs" method="POST">
-            <textarea name="content" rows="6" placeholder="New programs page content"></textarea><br>
-            <button type="submit">Update Programs Page</button>
-        </form>
-    </div>
-
-    <!-- Upload Pictures -->
-    <div class="section">
-        <h3>Upload Gallery Image</h3>
-        <form action="/upload-image" method="POST" enctype="multipart/form-data">
-            <input type="file" name="image" required><br>
-            <button type="submit">Upload Image</button>
-        </form>
-    </div>
-
-    <hr>
-
-    <!-- View Applications -->
-    <div class="section">
-        <h3>Admissions</h3>
-        <a href="/applications">View Admission Applications</a>
-    </div>
-
-    <!-- View Contact Messages -->
-    <div class="section">
-        <h3>Contact Messages</h3>
-        <a href="/contacts">View Contact Messages</a>
-    </div>
-
-    <!-- Back to Website -->
-    <div class="section">
-        <h3>Website</h3>
-        <a href="/">Go Back to Website</a>
+    <div class="footer-links">
+        <br>
+        <a href="/" class="btn-link">Go Back to Website</a>
     </div>
 
 </body>
