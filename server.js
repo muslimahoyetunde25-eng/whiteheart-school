@@ -19,7 +19,7 @@ app.use(session({
 
 // ================= ADMIN LOGIN DETAILS =================
 const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "12345";
+const ADMIN_PASSWORD = "penny1974";
 
 // ================= HELPER FUNCTION =================
 function ensureDataFolder() {
