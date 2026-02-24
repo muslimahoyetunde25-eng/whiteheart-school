@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body{
+            background: #fefefe;
+            color: #333;
+        }
+
         header {
             display: flex;
             justify-content: space-between;
@@ -12,6 +24,8 @@
             padding: 15px 40px;
             background: #004080;
             color: white;
+            flex-wrap: wrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         header .logo-container {
@@ -31,61 +45,166 @@
             margin-left: 20px;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s;
         }
 
         nav a:hover {
-            color: gold;
+            color: #FFD700;
         }
 
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
                         url("https://images.unsplash.com/photo-1588072432836-e10032774350");
             background-size: cover;
             background-position: center;
-            color: white;
+            color: #fff;
             text-align: center;
-            padding: 120px 20px;
+            padding: 140px 20px;
         }
 
-        .hero h1 {
-            font-size: 48px;
+        .hero h1{
+            font-size: 50px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
         }
 
-        .btn {
-            background: gold;
-            padding: 12px 25px;
-            color: black;
+        .hero p{
+            font-size: 22px;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .btn{
+            background: #FFD700;
+            color: #004080;
+            padding: 15px 30px;
             text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-            border-radius: 5px;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .section {
+        .btn:hover{
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .section{
             padding: 60px 40px;
             text-align: center;
         }
 
-        .cards {
+        .section h2{
+            font-size: 34px;
+            margin-bottom: 25px;
+            color: #004080;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section h2::after{
+            content:'';
+            width: 60px;
+            height: 3px;
+            background: #FFD700;
+            display: block;
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        .cards{
             display: grid;
             grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-            gap: 20px;
+            gap: 25px;
             margin-top: 30px;
         }
 
-        .card {
-            background: white;
+        .card{
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: #fff;
         }
 
-        footer {
+        .card h3{
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        #our-story .card, #our-story p{
+            background: #e0f7fa;
+            color: #006064;
+            box-shadow: none;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        #mission-vision .card:nth-child(1){
+            background: #ffccbc;
+        }
+
+        #mission-vision .card:nth-child(2){
+            background: #c5e1a5;
+        }
+
+        #programs .card:nth-child(1){
+            background: #81d4fa;
+        }
+
+        #programs .card:nth-child(2){
+            background: #ffd54f;
+            color: #004080;
+        }
+
+        #programs .card:nth-child(3){
+            background: #f48fb1;
+        }
+
+        #programs .card:nth-child(4){
+            background: #aed581;
+            color: #004080;
+        }
+
+        #programs .card:nth-child(5){
+            background: #ff8a65;
+        }
+
+        #gallery .card{
+            background: #b39ddb;
+            color: white;
+            padding: 40px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card:hover{
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+
+        footer{
             background: #00264d;
             color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+            padding: 25px 20px;
+            font-size: 16px;
+        }
+
+        @media(max-width:768px){
+            header{
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav{
+                margin-top: 10px;
+            }
+            nav a{
+                margin-left: 0;
+                margin-right: 15px;
+            }
         }
     </style>
 </head>
@@ -114,7 +233,39 @@
     <a href="admissions.html" class="btn">Apply Now</a>
 </section>
 
-<section class="section">
+<section class="section" id="our-story">
+    <h2>Our Story</h2>
+    <p>
+        Founded in 2015, Whiteheart School (Montessori) is dedicated to nurturing young learners through a child-centered approach 
+        that promotes independence, creativity, and excellence.
+    </p>
+    <p>
+        Our experienced teachers guide children from Reception to Primary with love and dedication, combining Montessori principles 
+        with modern teaching techniques to help each child reach their full potential academically, socially, and emotionally.
+    </p>
+</section>
+
+<section class="section" id="mission-vision">
+    <h2>Our Mission & Vision</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Our Mission</h3>
+            <p>
+                To provide a nurturing Montessori environment that fosters curiosity, creativity, and academic excellence 
+                while developing moral values and confidence in every child.
+            </p>
+        </div>
+        <div class="card">
+            <h3>Our Vision</h3>
+            <p>
+                To be recognized as a leading Montessori school, shaping young minds into compassionate, responsible, 
+                and innovative future leaders.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="programs">
     <h2>Our Programs</h2>
     <div class="cards">
         <div class="card">
@@ -122,13 +273,31 @@
             <p>Foundation learning and early development.</p>
         </div>
         <div class="card">
+            <h3>Discovery</h3>
+            <p>Hands-on creative exploration for curious minds.</p>
+        </div>
+        <div class="card">
             <h3>Nursery</h3>
-            <p>Building creativity and confidence.</p>
+            <p>Structured Montessori learning to build confidence.</p>
+        </div>
+        <div class="card">
+            <h3>Kindergarten</h3>
+            <p>Preparing children for primary education and social growth.</p>
         </div>
         <div class="card">
             <h3>Primary</h3>
-            <p>Strong academic and moral excellence.</p>
+            <p>Academic excellence and moral development for future leaders.</p>
         </div>
+    </div>
+</section>
+
+<section class="section" id="gallery">
+    <h2>Gallery Preview</h2>
+    <div class="cards">
+        <div class="card">Class Activities</div>
+        <div class="card">Sports Day</div>
+        <div class="card">Graduation</div>
+        <div class="card">Cultural Day</div>
     </div>
 </section>
 
