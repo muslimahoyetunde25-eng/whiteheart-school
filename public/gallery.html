@@ -1,36 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Gallery - Whiteheart School</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <header class="header">
+        <div class="logo">
+            <img src="/images/logo.png" alt="Whiteheart School Logo">
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/programs">Programs</a></li>
+                <li><a href="/admissions">Admissions</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/admin">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<header>
-    <h2>Whiteheart School</h2>
-    <nav>
-        <a href="/">Home</a>
-        <a href="about.html">About</a>
-        <a href="programs.html">Programs</a>
-        <a href="admissions.html">Admissions</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+    <section class="gallery-content">
+        <h1>Photo Gallery</h1>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="/images/gallery1.jpg" alt="School event">
+                <p>School Science Fair</p>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="/images/gallery2.jpg" alt="Classroom">
+                <p>Reading Circle</p>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="/images/gallery3.jpg" alt="Playground">
+                <p>Playground Fun</p>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="/images/gallery4.jpg" alt="Art project">
+                <p>Art Workshop</p>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="/images/gallery5.jpg" alt="Nature walk">
+                <p>Nature Walk</p>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="/images/gallery6.jpg" alt="Dance performance">
+                <p>Dance Performance</p>
+            </div>
+        </div>
+    </section>
 
-<section class="section">
-    <h2>School Gallery</h2>
-    <div class="cards">
-        <div class="card">Class Activities</div>
-        <div class="card">Sports Day</div>
-        <div class="card">Graduation</div>
-        <div class="card">Cultural Day</div>
-    </div>
-</section>
-
-<footer>
-    <p>© 2026 Whiteheart School</p>
-</footer>
-
+    <footer class="footer">
+        <p>&copy; 2023 Whiteheart School. All rights reserved.</p>
+    </footer>
 </body>
 </html>
