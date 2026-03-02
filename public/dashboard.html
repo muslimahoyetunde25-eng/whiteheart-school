@@ -1,54 +1,143 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Admin Dashboard</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Whiteheart School</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <header class="header">
+        <div class="logo">
+            <img src="/images/logo.png" alt="Whiteheart School Logo">
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/programs">Programs</a></li>
+                <li><a href="/admissions">Admissions</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/admin">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<header>
-<div class="logo-container">
-<img src="/images/logo.png" class="logo">
-<h2>Admin Panel</h2>
-</div>
-</header>
+    <div class="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        
+        <div class="content-editors">
+            <!-- Existing editors -->
+            <div class="editor">
+                <h3>Edit Home Page</h3>
+                <textarea id="home-content"></textarea>
+                <button onclick="saveContent('home')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit About Page</h3>
+                <textarea id="about-content"></textarea>
+                <button onclick="saveContent('about')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Programs Page</h3>
+                <textarea id="programs-content"></textarea>
+                <button onclick="saveContent('programs')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Admissions Page</h3>
+                <textarea id="admissions-content"></textarea>
+                <button onclick="saveContent('admissions')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Gallery</h3>
+                <textarea id="gallery-content"></textarea>
+                <button onclick="saveContent('gallery')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Contact Page</h3>
+                <textarea id="contact-content"></textarea>
+                <button onclick="saveContent('contact')">Save</button>
+            </div>
+            
+            <!-- New mission and vision editors -->
+            <div class="editor">
+                <h3>Edit Mission Statement</h3>
+                <textarea id="mission-content"></textarea>
+                <button onclick="saveContent('mission')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Vision Statement</h3>
+                <textarea id="vision-content"></textarea>
+                <button onclick="saveContent('vision')">Save</button>
+            </div>
+        </div>
+        
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
 
-<section class="section">
-
-<h2>Upload Video</h2>
-
-<form action="/upload-video" method="POST" enctype="multipart/form-data">
-<input type="file" name="video" required>
-<button type="submit" class="btn">Upload</button>
-</form>
-
-<h2 style="margin-top:40px;">Delete Videos</h2>
-
-<div id="videoList"></div>
-
-</section>
-
-<script>
-async function loadVideos(){
-const res = await fetch('/list-videos');
-const videos = await res.json();
-const container = document.getElementById('videoList');
-container.innerHTML = "";
-
-videos.forEach(video=>{
-container.innerHTML += `
-<div style="margin:10px;">
-${video}
-<form action="/delete-video" method="POST" style="display:inline;">
-<input type="hidden" name="filename" value="${video}">
-<button type="submit">Delete</button>
-</form>
-</div>
-`;
-});
-}
-loadVideos();
-</script>
-
+    <script>
+        // Load content when page loads
+        window.onload = function() {
+            loadContent('home');
+            loadContent('about');
+            loadContent('programs');
+            loadContent('admissions');
+            loadContent('gallery');
+            loadContent('contact');
+            loadContent('mission');
+            loadContent('vision');
+        };
+        
+        function loadContent(page) {
+            // In a real app, fetch content from server
+            const sampleContent = {
+                home: "<h1>Welcome to Whiteheart School</h1><p>Montessori Education for the Future</p>",
+                about: "<h1>About Us</h1><p>Whiteheart School is...</p>",
+                programs: "<h1>Our Programs</h1><p>Montessori education for...</p>",
+                admissions: "<h1>Admissions</h1><p>How to apply...</p>",
+                gallery: "<h1>Photo Gallery</h1><p>Images of our students...</p>",
+                contact: "<h1>Contact Us</h1><p>Get in touch...</p>",
+                mission: "<h2>Our Mission</h2><p>To provide an enriching...</p>",
+                vision: "<h2>Our Vision</h2><p>A community of learners...</p>"
+            };
+            
+            document.getElementById(`${page}-content`).value = sampleContent[page] || '';
+        }
+        
+        function saveContent(page) {
+            const content = document.getElementById(`${page}-content`).value;
+            // In a real app, send to server using fetch or AJAX
+            alert(`Saved changes to ${page} page`);
+            
+            // Simulate saving to server
+            fetch(`/api/content/${page}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Successfully saved changes to ${page} page`);
+                } else {
+                    alert('Failed to save changes');
+                }
+            });
+        }
+        
+        function logout() {
+            fetch('/admin/logout', { method: 'POST' })
+            .then(() => window.location.href = '/admin');
+        }
+    </script>
 </body>
 </html>
