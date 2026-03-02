@@ -1,15 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Whiteheart School</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h2>Admin Login</h2>
+    <div class="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        
+        <div class="content-editors">
+            <!-- Existing editors -->
+            <div class="editor">
+                <h3>Edit Home Page</h3>
+                <textarea id="home-content"></textarea>
+                <button onclick="saveContent('home')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit About Page</h3>
+                <textarea id="about-content"></textarea>
+                <button onclick="saveContent('about')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Programs Page</h3>
+                <textarea id="programs-content"></textarea>
+                <button onclick="saveContent('programs')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Admissions Page</h3>
+                <textarea id="admissions-content"></textarea>
+                <button onclick="saveContent('admissions')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Gallery</h3>
+                <textarea id="gallery-content"></textarea>
+                <button onclick="saveContent('gallery')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Contact Page</h3>
+                <textarea id="contact-content"></textarea>
+                <button onclick="saveContent('contact')">Save</button>
+            </div>
+            
+            <!-- New mission and vision editors -->
+            <div class="editor">
+                <h3>Edit Mission Statement</h3>
+                <textarea id="mission-content"></textarea>
+                <button onclick="saveContent('mission')">Save</button>
+            </div>
+            
+            <div class="editor">
+                <h3>Edit Vision Statement</h3>
+                <textarea id="vision-content"></textarea>
+                <button onclick="saveContent('vision')">Save</button>
+            </div>
+        </div>
+        
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
 
-    <form action="/login" method="POST">
-        <input type="text" name="username" placeholder="Username" required><br><br>
-        <input type="password" name="password" placeholder="Password" required><br><br>
-        <button type="submit">Login</button>
-    </form>
+    <script>
+        // Load content when page loads
+        window.onload = function() {
+            loadContent('home');
+            loadContent('about');
+            loadContent('programs');
+            loadContent('admissions');
+            loadContent('gallery');
+            loadContent('contact');
+            loadContent('mission');
+            loadContent('vision');
+        };
+        
+        function loadContent(page) {
+            // In a real app, fetch content from server
+            const sampleContent = {
+                home: "<h1>Welcome to Whiteheart School</h1><p>Montessori Education for the Future</p>",
+                about: "<h1>About Us</h1><p>Whiteheart School is...</p>",
+                programs: "<h1>Our Programs</h1><p>Montessori education for...</p>",
+                admissions: "<h1>Admissions</h1><p>How to apply...</p>",
+                gallery: "<h1>Photo Gallery</h1><p>Images of our students...</p>",
+                contact: "<h1>Contact Us</h1><p>Get in touch...</p>",
+                mission: "<h2>Our Mission</h2><p>To provide an enriching...</p>",
+                vision: "<h2>Our Vision</h2><p>A community of learners...</p>"
+            };
+            
+            document.getElementById(`${page}-content`).value = sampleContent[page] || '';
+        }
+        
+        function saveContent(page) {
+            const content = document.getElementById(`${page}-content`).value;
+            // In a real app, send to server using fetch or AJAX
+            alert(`Saved changes to ${page} page`);
+            
+            // Simulate saving to server
+            fetch(`/api/content/${page}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Successfully saved changes to ${page} page`);
+                } else {
+                    alert('Failed to save changes');
+                }
+            });
+        }
+        
+        function logout() {
+            fetch('/admin/logout', { method: 'POST' })
+            .then(() => window.location.href = '/admin');
+        }
+    </script>
 </body>
 </html>
